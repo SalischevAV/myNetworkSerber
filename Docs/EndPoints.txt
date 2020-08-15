@@ -1,0 +1,27 @@
+/api
+     /users
+            :get
+            :post
+
+    /users/:id 
+            :get
+
+    /posts 
+            :get
+            :post
+            :delete
+
+    /comments
+            :get
+            :post
+            :delete
+
+    /albums
+            :get
+            :post
+            :delete
+
+    /photos
+            :get
+            :post
+            :delete
