@@ -1,0 +1,49 @@
+const Comment = require('../Model').Comment;
+
+module.exports.getAll = (req, res, next)=>{
+    Comment.find({}, (err, data)=>{
+        if(data){
+            res.json(data);
+        } else {
+            next(err);
+        }
+    });
+};
+
+module.exports.get = (req, res, next)=>{
+    Comment.findById(req.params.id, (err,data)=>{
+        if(data){
+            res.json(data);
+        } else{
+            next(err);
+        }
+    });
+};
+
+module.exports.post = (req, res, next)=>{
+    Comment.create({
+        postId: req.body.postId,
+        name: req.body.name,
+        email: req.body.email,
+        body: req.body.body,
+    }), (err, data) =>{
+        if(data){
+            res.status(201);
+            res.set('Location', `${req.baseUrl}/${data.id}`);
+            res.send(data);
+        } else{
+            next(err);
+        }
+    };
+};
+
+module.exports.delete = (req, res, next)=>{
+    Comment.findByIdAndDelete(req.params.id, (err, data)=>{
+        if(data){
+            res.status(204);
+            res.end();
+        } else {
+            next(err);
+        }
+    });
+};

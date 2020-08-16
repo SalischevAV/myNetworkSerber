@@ -3,8 +3,8 @@ const Schema = mongoose.Schema;
 
 const CommentSchema = new Schema({
     postId:{
-        type: mongoose.Types.ObjectId,
-        ref: 'Post'
+        //type: mongoose.Types.ObjectId,
+        //ref: 'Post'
     },
     name: String,
     email: {

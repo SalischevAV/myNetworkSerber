@@ -1,6 +1,6 @@
 const Post = require('../Model').Post;
 
-module.exports.getAll = (req, res) =>{
+module.exports.getAll = (req, res, next) =>{
     Post.find({}, (err, data)=>{
         if(data){
             res.json(data);
@@ -10,8 +10,8 @@ module.exports.getAll = (req, res) =>{
     });
 }
 
-module.exports.get = (req, res) =>{
-    Post.findById(req.params.id, (err, data, next)=>{
+module.exports.get = (req, res, next) =>{
+    Post.findById(req.params.id, (err, data)=>{
         if(data){
             res.json(data);
         } else {
@@ -20,16 +20,16 @@ module.exports.get = (req, res) =>{
     })
 }
 
-module.exports.post = (req, res) => {
+module.exports.post = (req, res, next) => {
     Post.create(
         {
             userId: req.body.userId,
             title: req.body.title,
             body: req.body.body,
 
-        }, (err, data, next) =>{
+        }, (err, data) =>{
             if(data){
-                res.status(200);
+                res.status(201);
                 res.set('Location', `${req.baseUrl}/${data.id}`);
                 res.json(data);
             } else {
@@ -39,27 +39,15 @@ module.exports.post = (req, res) => {
     )
 };
 
-module.exports.delete = (req, res)=>{
+module.exports.delete = (req, res, next)=>{
     Post.findByIdAndDelete(req.params.id, (err, deletedData)=>{
         if(err){
             next(err);
         } else {
-            res.status(200);
+            res.status(204);
             res.end();
         }
     })
 };
 
 
-/*
-Post.updateMany({userId:10}, {$set:{userId: '5f3845a71b19eb3984d023a4'}}, {upsert: true}, (err, res)=>{
-        if(res){
-            console.dir(res);
-            //res.end()
-        } else if (err)
-        {
-            console.log('err:' + err)
-            //res.end()
-        }
-    })
-*/

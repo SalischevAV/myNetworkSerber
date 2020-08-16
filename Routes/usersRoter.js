@@ -1,5 +1,5 @@
 const usersRouter = require('express').Router();
-const UserApiController = require('../Controller/UserApiController')
+const UserApiController = require('../Controller').UserApiController;
 
 
 usersRouter.get('/', UserApiController.getAll);
