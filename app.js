@@ -22,11 +22,9 @@ mongoose.connect('mongodb://localhost:27017/myNetworkDB',
                     }
                 });
 
-app.use('/qwe', (req, res)=>{
-    res.send('qwe');
-});
 app.use('/api', bodyParser.json());
 app.use('/api/users', Routes.usersRouter);
+app.use('/api/posts', Routes.postsRouter);
 
 
 

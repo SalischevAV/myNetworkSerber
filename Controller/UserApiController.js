@@ -1,5 +1,4 @@
-const Model = require('../Model');
-const User = Model.User;
+const User = require('../Model').User;
 
 module.exports.getAll = (req, res, next) =>{
     User.find({}, (err, data)=>{
@@ -12,11 +11,11 @@ module.exports.getAll = (req, res, next) =>{
 };
 
 module.exports.get = (req, res, next) =>{
-    User.findById(req.params.id, (err, data)=>{
+    User.findById(req.params.id, (err, data, next)=>{
         if(data){
             res.json(data);
         }
-        else{
+        else {
             next(err);
         }
     });
@@ -36,6 +35,7 @@ module.exports.post = (req, res, next) =>{
                 res.set('Location', `${req.baseUrl}/${data.id}`);
                 res.json(data);
             } else {
+
                 next(err);
             }
         }

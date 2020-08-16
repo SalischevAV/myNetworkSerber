@@ -9,7 +9,10 @@
     /posts 
             :get
             :post
-            :delete
+
+    /posts/:inde
+            :get
+            :delete        
 
     /comments
             :get

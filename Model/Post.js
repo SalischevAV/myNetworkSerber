@@ -2,7 +2,6 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 const PostSchema = new Schema({
-    _id: mongoose.Types.ObjectId,
     userId: {
         type: mongoose.Types.ObjectId,
         ref: 'User'
@@ -17,8 +16,15 @@ const PostSchema = new Schema({
         type: String,
         require: true,
         minlength: 2,
-        maxlength: 32,
+        maxlength: 1600,
     },
 },{versionKey: false});
 
 module.exports = mongoose.model('Post', PostSchema);
+
+/*
+userId: {
+        type: mongoose.Types.ObjectId,
+        ref: 'User'
+    }
+*/
