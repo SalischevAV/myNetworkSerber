@@ -22,7 +22,19 @@ mongoose.connect('mongodb://localhost:27017/myNetworkDB',
                     }
                 });
 
-app.use('/api', bodyParser.json());
+app.use((req, res, next)=>{
+    res.set('Access-Control-Allow-Origin', '*');
+    res.set('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Contetnt-type, Accept');
+    app.options((req,res)=>{
+        res.set('Access-Control-Allow-Methods', 'GET, PATCH, PUT, POST, DELETE, OPTIONS');
+        res.send();
+    });
+    next();
+})
+
+
+app.use('/api/', bodyParser.urlencoded({extended: true}));
+app.use('/api/', bodyParser.json());
 app.use('/api/users', Routes.usersRouter);
 app.use('/api/posts', Routes.postsRouter);
 app.use('/api/comments', Routes.commentsRouter);

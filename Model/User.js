@@ -3,23 +3,23 @@ const Schema = mongoose.Schema;
 
 const UserSchema = new Schema({
     name:{
-        type: String,
-        required : true,
-        minlength: 3,
+        //type: String,
+        //required : true,
+        //minlength: 3,
     },
     username: {
-        type: String,
-        required : true,
-        minlength: 3,
+        //type: String,
+        //required : true,
+        //minlength: 3,
     },
     email: {
-        type: String,
+        //type: String,
     },
     phone: {
-        type: String
+        //type: String
     },
     website: {
-        type: String,
+        //type: String,
     },
 },{versionKey: false});
 

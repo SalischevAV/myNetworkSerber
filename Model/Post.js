@@ -3,8 +3,8 @@ const Schema = mongoose.Schema;
 
 const PostSchema = new Schema({
     userId: {
-        type: mongoose.Types.ObjectId,
-        ref: 'User'
+        //type: mongoose.Types.ObjectId,
+        //ref: 'User'
     },
     title: {
         type: String,

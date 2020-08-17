@@ -1,8 +1,8 @@
 const Post = require('../Model').Post;
 
-module.exports.getAll = (req, res, next) =>{
-    Post.find({}, (err, data)=>{
-        if(data){
+module.exports.getAll = (req, res, next) => {
+    Post.find({}, (err, data) => {
+        if (data) {
             res.json(data);
         } else {
             next(err);
@@ -10,9 +10,9 @@ module.exports.getAll = (req, res, next) =>{
     });
 }
 
-module.exports.get = (req, res, next) =>{
-    Post.findById(req.params.id, (err, data)=>{
-        if(data){
+module.exports.get = (req, res, next) => {
+    Post.findById(req.params.id, (err, data) => {
+        if (data) {
             res.json(data);
         } else {
             next(err);
@@ -27,23 +27,27 @@ module.exports.post = (req, res, next) => {
             title: req.body.title,
             body: req.body.body,
 
-        }, (err, data) =>{
-            if(data){
+        }, (err, data) => {
+            if (data) {
                 res.status(201);
                 res.set('Location', `${req.baseUrl}/${data.id}`);
                 res.json(data);
             } else {
-               next(err);
+                next(err);
             }
         }
     )
 };
 
-module.exports.delete = (req, res, next)=>{
-    Post.findByIdAndDelete(req.params.id, (err, deletedData)=>{
-        if(err){
+module.exports.delete = (req, res, next) => {
+    Post.findByIdAndDelete(req.params.id, (err, deletedData) => {
+        if (err) {
             next(err);
         } else {
+            res.status(200);
+            res.set('Access-Control-Allow-Methods', 'PUT,PATCH,DELETE');
+            res.set('Access-Control-Allow-Headers', 'Content-Type');
+            res.set('Access-Control-Allow-Origin', '*');
             res.status(204);
             res.end();
         }

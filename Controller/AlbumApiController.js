@@ -3,6 +3,7 @@ const Album = require('../Model').Album;
 module.exports.getAll = (req,res, next)=>{
     Album.find({}, (err, data)=>{
         if(data){
+            res.set('Access-Control-Allow-Origin', '*');
             res.json(data);
         } else {
             next(err);
@@ -13,6 +14,7 @@ module.exports.getAll = (req,res, next)=>{
 module.exports.get = (req, res, next)=>{
     Album.findById(req.params.id, (err, data)=>{
         if(data){
+            res.set('Access-Control-Allow-Origin', '*');
             res.json(data);
         }else {
             next(err);
@@ -26,6 +28,10 @@ module.exports.post = (req, res, next) =>{
         title: req.body.title,
     }, (err, data)=>{
         if(data){
+            res.status(200);
+            res.set('Access-Control-Allow-Methods', 'PUT,PATCH,DELETE');
+            res.set('Access-Control-Allow-Headers', 'Content-Type');
+            res.set('Access-Control-Allow-Origin', '*');
             res.status(201);
             res.set('Location', `${req.baseUrl}/${data.id}`);
             res.json(data);
