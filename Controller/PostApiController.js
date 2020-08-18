@@ -1,4 +1,5 @@
 const Post = require('../Model').Post;
+const mongodb = require('mongodb');
 
 module.exports.getAll = (req, res, next) => {
     Post.find({}, (err, data) => {
@@ -23,7 +24,7 @@ module.exports.get = (req, res, next) => {
 module.exports.post = (req, res, next) => {
     Post.create(
         {
-            userId: req.body.userId,
+            userId: mongodb.ObjectId(req.body.userId),
             title: req.body.title,
             body: req.body.body,
 

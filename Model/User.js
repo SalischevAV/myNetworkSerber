@@ -21,6 +21,9 @@ const UserSchema = new Schema({
     website: {
         //type: String,
     },
+    firebaseId:{
+
+    },
 },{versionKey: false});
 
 module.exports= mongoose.model('User', UserSchema);

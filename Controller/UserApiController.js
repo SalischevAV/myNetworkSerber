@@ -30,6 +30,7 @@ module.exports.post = (req, res, next) => {
             email: req.body.email,
             phone: req.body.phone,
             website: req.body.website,
+            firebaseId:req.body.firebaseId,
         }, (err, data) => {
             if (data) {
                 console.log('response: ' +data)
