@@ -1,8 +1,9 @@
 const User = require('../Model').User;
 
 module.exports.getAll = (req, res, next) => {
-    User.find({}, (err, data) => {
+    User.find({}).sort({name: 1}).exec((err, data) => {
         if (data) {
+            res.status(200);
             res.json(data);
         } else {
             next(err);
@@ -11,8 +12,9 @@ module.exports.getAll = (req, res, next) => {
 };
 
 module.exports.get = (req, res, next) => {
-    User.findById(req.params.id, (err, data, next) => {
+    User.findById(req.params.id, (err, data) => {
         if (data) {
+            res.status(200);
             res.json(data);
         }
         else {
@@ -21,8 +23,19 @@ module.exports.get = (req, res, next) => {
     });
 };
 
+module.exports.getFirebaseUser=(req, res, next)=>{
+    User.findOne({firebaseId:req.params.id}, (err, data)=>{
+        if(data){
+            res.status(200);
+            res.json(data);
+        } else{
+            console.log(err);
+            next(err);
+        }
+    });
+};
+
 module.exports.post = (req, res, next) => {
-    console.dir(req.body);
     User.create(
         {
             name: req.body.name,
@@ -33,12 +46,10 @@ module.exports.post = (req, res, next) => {
             firebaseId:req.body.firebaseId,
         }, (err, data) => {
             if (data) {
-                console.log('response: ' +data)
                 res.status(201);
                 res.set('Location', `${req.baseUrl}/${data.id}`);
                 res.json(data);
             } else {
-                console.log(err)
                 next(err);
             }
         }

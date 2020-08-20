@@ -1,19 +1,26 @@
 const Post = require('../Model').Post;
 const mongodb = require('mongodb');
+const PAGE_SIZE = 10;
 
 module.exports.getAll = (req, res, next) => {
-    Post.find({}, (err, data) => {
-        if (data) {
-            res.json(data);
-        } else {
-            next(err);
-        }
-    });
+        Post.countDocuments({}, (err, total_count)=>{
+            Post.find({}).skip((req.query.page-1)*req.query.limit).limit(Number(req.query.limit)).sort({_id: -1}).exec((err, posts) => {
+                if (posts) {
+                    res.status(200);
+                    res.json({total_count, posts});
+                } else {
+                    next(err);
+                }
+            });
+        });
+        
+    
 }
 
 module.exports.get = (req, res, next) => {
     Post.findById(req.params.id, (err, data) => {
         if (data) {
+            res.status(200);
             res.json(data);
         } else {
             next(err);

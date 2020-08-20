@@ -3,6 +3,7 @@ const Album = require('../Model').Album;
 module.exports.getAll = (req,res, next)=>{
     Album.find({}, (err, data)=>{
         if(data){
+            res.status(200);
             res.json(data);
         } else {
             next(err);
@@ -13,6 +14,7 @@ module.exports.getAll = (req,res, next)=>{
 module.exports.get = (req, res, next)=>{
     Album.findById(req.params.id, (err, data)=>{
         if(data){
+            res.status(200);
             res.json(data);
         }else {
             next(err);

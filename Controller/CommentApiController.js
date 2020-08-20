@@ -3,6 +3,7 @@ const Comment = require('../Model').Comment;
 module.exports.getAll = (req, res, next)=>{
     Comment.find({}, (err, data)=>{
         if(data){
+            res.status(200);
             res.json(data);
         } else {
             next(err);
@@ -13,6 +14,7 @@ module.exports.getAll = (req, res, next)=>{
 module.exports.get = (req, res, next)=>{
     Comment.findById(req.params.id, (err,data)=>{
         if(data){
+            res.status(200);
             res.json(data);
         } else{
             next(err);

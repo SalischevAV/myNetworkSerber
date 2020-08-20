@@ -5,7 +5,7 @@ module.exports = class baseCRUDController {
     getAll(req, res, next) {
         model.find({}, (err, data) => {
             if (data) {
-                res.set('Access-Control-Allow-Origin', '*');
+                res.status(200);
                 res.json(data);
             } else {
                 next(err);
@@ -16,7 +16,7 @@ module.exports = class baseCRUDController {
     get(req, res, next) {
         model.findById(req.params.id, (err, data) => {
             if (data) {
-                res.set('Access-Control-Allow-Origin', '*');
+                res.status(200);
                 res.json(data);
             } else {
                 next(err);
