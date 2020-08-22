@@ -1,15 +1,17 @@
 const User = require('../Model').User;
 
 module.exports.getAll = (req, res, next) => {
-    User.find({}).sort({name: 1}).exec((err, data) => {
-        if (data) {
-            res.status(200);
-            res.json(data);
-        } else {
-            next(err);
-        }
-    });
-};
+    User.countDocuments({}, (err, total_count)=>{
+        User.find({}).skip((req.query.page-1)*req.query.limit).limit(Number(req.query.limit)).sort({_id: -1}).exec((err, users) => {
+            if (users) {
+                res.status(200);
+                res.json({total_count, users});
+            } else {
+                next(err);
+            }
+        });
+    });       
+}
 
 module.exports.get = (req, res, next) => {
     User.findById(req.params.id, (err, data) => {

@@ -4,7 +4,7 @@ const commentsRouter = require('./commentsRouter');
 const albumsRouter = require('./albumsRouter');
 
 module.exports = {
-    usersRouter : usersRouter,
+    usersRouter: usersRouter,
     postsRouter: postsRouter,
     commentsRouter: commentsRouter,
     albumsRouter: albumsRouter

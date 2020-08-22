@@ -1,6 +1,5 @@
 const Post = require('../Model').Post;
 const mongodb = require('mongodb');
-const PAGE_SIZE = 10;
 
 module.exports.getAll = (req, res, next) => {
         Post.countDocuments({}, (err, total_count)=>{
@@ -12,10 +11,8 @@ module.exports.getAll = (req, res, next) => {
                     next(err);
                 }
             });
-        });
-        
-    
-}
+        });       
+    }
 
 module.exports.get = (req, res, next) => {
     Post.findById(req.params.id, (err, data) => {
@@ -52,10 +49,6 @@ module.exports.delete = (req, res, next) => {
         if (err) {
             next(err);
         } else {
-            res.status(200);
-            res.set('Access-Control-Allow-Methods', 'PUT,PATCH,DELETE');
-            res.set('Access-Control-Allow-Headers', 'Content-Type');
-            res.set('Access-Control-Allow-Origin', '*');
             res.status(204);
             res.end();
         }

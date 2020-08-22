@@ -1,7 +1,6 @@
 const postsRouter = require('express').Router();
 const PostApiController = require('../Controller').PostApiController;
 
-// postsRouter.get('/:page', PostApiController.getAll);
 postsRouter.get('/', PostApiController.getAll);
 postsRouter.post('/', PostApiController.post);
 

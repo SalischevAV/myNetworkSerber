@@ -1,8 +1,6 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
-const url = require('url');
-const querystring = require('querystring');
 
 const app = express();
 const server = require('http').Server(app);
