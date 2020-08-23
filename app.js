@@ -38,6 +38,7 @@ app.use('/api/users', Routes.usersRouter);
 app.use('/api/posts', Routes.postsRouter);
 app.use('/api/comments', Routes.commentsRouter);
 app.use('/api/albums', Routes.albumsRouter);
+app.use('/api/news', Routes.newsRouter);
 
 
 
