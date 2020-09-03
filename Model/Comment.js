@@ -3,8 +3,8 @@ const Schema = mongoose.Schema;
 
 const CommentSchema = new Schema({
     postId:{
-        //type: mongoose.Types.ObjectId,
-        //ref: 'Post'
+        type: mongoose.Types.ObjectId,
+        ref: 'Post'
     },
     name: String,
     email: {
@@ -14,7 +14,11 @@ const CommentSchema = new Schema({
         type: String,
         required: true,
         minlength: 8,
-    }
+    },
+    date: { 
+        type: Date,
+         default: Date.now 
+        },
 },{versionKey: false});
 
 module.exports = mongoose.model('Comment', CommentSchema);
