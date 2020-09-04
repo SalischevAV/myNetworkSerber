@@ -1,6 +1,7 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
+const ChatController = require('./Controller').ChatController;
 
 const app = express();
 const server = require('http').Server(app);
@@ -8,6 +9,8 @@ const io = require('socket.io')(server);
 
 
 const Routes = require('./Routes');
+
+let clients=0;
 
 mongoose.connect('mongodb://localhost:27017/myNetworkDB',
                 {
@@ -40,10 +43,6 @@ app.use('/api/comments', Routes.commentsRouter);
 app.use('/api/albums', Routes.albumsRouter);
 app.use('/api/news', Routes.newsRouter);
 
-
-
-
-
 app.use((req, res, err)=>{
     if(res.headersSent){
         return next(err);
@@ -60,6 +59,35 @@ app.use((req, res)=>{
     res.status(404);
     res.send('Not Found');
 });
+
+
+
+
+io.on('connect', socket=>{
+    clients++;
+    console.log(`connection established via id: ${socket.id}`);
+    socket.on('chat', data=>console.log('gggggg'));
+
+
+
+    socket.on('register', data=>{
+        const list = ChatController.register(data);
+        socket.emit('register', [...list]);
+    });
+    socket.on('unregister', data=>{
+        const list = ChatController.unregister(data);
+        socket.emit('unregister', [...list]);
+    });
+
+
+    socket.on('disconnect', data => {
+        clients--;
+        console.log('clients dc', clients)
+    });
+});
+
+
+
 
 server.listen(8080, (err)=>{
     if(err){
