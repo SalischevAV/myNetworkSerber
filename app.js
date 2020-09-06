@@ -72,11 +72,17 @@ io.on('connect', socket=>{
 
     socket.on('register', data=>{
         const list = ChatController.register(data);
-        socket.emit('register', [...list]);
+        socket.broadcast.emit('register', [...list]);
+        // socket.broadcast.emit('register', [...list]);
+        // io.sockets.emit('broadcast', [...list]);
+        console.log('register', list)
     });
     socket.on('unregister', data=>{
         const list = ChatController.unregister(data);
         socket.emit('unregister', [...list]);
+        // socket.broadcast.emit('unregister', [...list]);
+        // io.sockets.emit('broadcast', [...list]);
+        console.log('unregister', list)
     });
 
 

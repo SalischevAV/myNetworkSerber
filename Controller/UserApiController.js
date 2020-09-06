@@ -1,4 +1,5 @@
 const User = require('../Model').User;
+const mongoose = require('mongoose');
 
 module.exports.getAll = (req, res, next) => {
     User.countDocuments({}, (err, total_count)=>{
@@ -14,13 +15,14 @@ module.exports.getAll = (req, res, next) => {
 }
 
 module.exports.get = (req, res, next) => {
+    console.log('executing req:', req.params.id)
     User.findById(req.params.id, (err, data) => {
         if (data) {
             res.status(200);
             res.json(data);
         }
         else {
-            next(err);
+            console.log(err);
         }
     });
 };

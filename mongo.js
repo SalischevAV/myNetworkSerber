@@ -17,7 +17,7 @@ mongoose.connect('mongodb://localhost:27017/myNetworkDB', err =>{
     }
 });
 
-User.updateMany({}, {$set:{roleId:mongodb.ObjectId('5f50e3ffe8a596717fd3e260')}})
+//User.updateMany({}, {$set:{roleId:mongodb.ObjectId('5f50e3ffe8a596717fd3e260')}})
 
 // MongoClient.connect(url, (err, client)=>{
 //     const db = client.db(dbName);
